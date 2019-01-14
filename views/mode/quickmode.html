@@ -1,0 +1,249 @@
+<style>
+    /*style*/
+    .progresslineleft {
+        clear: left;
+        float: left;
+        padding-top: 4px;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .progresslineright {
+        float: left;
+        padding-top: 4px;
+        font-size: 0.9em;
+        color: #008800;
+    }
+
+    .progressbar {
+        border: 2px solid #ccc;
+        width: 240px;
+        height: 30px;
+        margin: 2px;
+        padding: 1px;
+        background: white;
+        float: left;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .progressbar div {
+        background-color: RGB(225, 153, 173);
+        text-align: right;
+        height: 24px;
+    }
+
+    .controlDiv {
+        cursor: pointer;
+        height: 130px;
+        left: 47%;
+        margin: -60px 0px 0px -60px;
+        position: relative;
+        top: -120px;
+        width: 130px;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+    }
+
+    .controlDiv.play {
+        background: url(http://localhost/listen/src/image/youtube-play.png) no-repeat 50% 50%;
+    }
+
+    .controlDiv.stop {
+        background: url(http://localhost/listen/src/image/youtube-stop.png) no-repeat 50% 50%;
+    }
+
+</style>
+<section class="has-sidebar u-padding-t-50 u-padding-b-80">
+    <div class="container">
+        <div class="row" data-sticky_parent="">
+            <div class="col-lg-8 content-wrapper">
+                <div data-sticky_column="">
+                    <div class="m-post-content m-post-content--tok">
+                        <div class="post-top">
+                            <div class="breadcrumbs u-margin-b-10">
+                                <span>
+                                    {% if lang=="en" %}
+                                    <a href="/">Home</a>
+                                    {% else %}
+                                    <a href="/">Maison</a>
+                                    {% endif %}
+                                </span>
+                                <span class="separetor">-</span>
+                                <span><a href="/audio/choose/17061">Quick Mode</a></span>
+                                <span class="separetor">-</span>
+                                <span class="current">{{lists[0].name}}</span>
+                            </div>
+                            <h1 class="post-title">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="width:120px;height:120px; border: 6px solid #DDDDDD; background:RGB(120,188,100);vertical-align:middle;">
+                                                <center style="padding:10px;"><a href="/audio/level/12"
+                                                                                 style="color: #000000;background-color: RGB(120,188,100);">
+                                                    {% if lists[0].level_audio > 0 %}
+                                                    {{lists[0].level_audio}}
+                                                    {% else %}
+                                                    {{lists[0].level_video}}
+                                                    {% endif %}
+                                                </a></center>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{lists[0].name}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </h1>
+                            <div class="post-meta">
+                                <div class="item">
+                                    <i class="fa fa-microphone"></i>
+                                    <strong>French</strong>
+                                </div>
+                                <div class="item">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{lists[0].create_at}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry-content">
+
+                            <div id="player2" style="border:2px solid #dddddd; padding-bottom:10px;">
+                                <p>
+                                </p>
+                                <div id="sentence_list">
+                                    <div style="display: none">
+                                        {% for t in track %}
+                                        <div id="{{t.name}}" data-index="{{t.id}}">
+                                            <div>{{t.start}}</div>
+                                            <div>{{t.end}}</div>
+                                            <div hidden>{{t.lyrics}}</div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div>
+                                        {% if lang=="en" %}
+                                        <i style="padding: 0px 15px;">Click play to start dictation or select the
+                                            track</i>
+                                        {% else %}
+                                        <i style="padding: 0px 15px;">Cliquez sur Lecture pour lancer la dictée ou sélectionner la piste.</i>
+                                        {% endif %}:
+                                        <select id="sentences_no" class="select-style" onchange="stopListen()">
+                                            {% for t in track %}
+                                            <option value="{{t.sequence}}" >{{t.sequence}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        of {{track|length}}
+                                    </div>
+                                    <div>
+                                        <br>
+                                        <table border="0">
+                                            <tbody>
+                                            <tr>
+                                                <td width="20" align="right">
+                                                </td>
+                                                <td>
+                                                    {% if lists[0].file_id == 2 %}
+                                                    <div>
+                                                        <video width="320" height="240" preload controls id="audio-element">
+                                                            <source src="{{lists[0].path}}" type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                    </div>
+                                                    {% else %}
+                                                    <div style="display: none;">
+                                                        <audio preload controls id="audio-element">
+                                                            <source src="{{lists[0].path}}" type="audio/mp3"></source>
+                                                        </audio>
+                                                    </div>
+                                                    {% endif %}
+                                                    <div style="overflow: hidden;position: relative;height:220px;">
+                                                        <progress value="1" max="100" style="width:550px; height:8px;" id="slimprogress"></progress>
+                                                        <div id="scriptok" style="background: rgb(195, 253, 184); color: rgb(51, 51, 51);"></div>
+                                                        <div id="controlPlay" onclick="playStart()"
+                                                             class="controlDiv play">
+                                                        </div>
+                                                    </div>
+                                                    <i class="button medium icon"><i class="delete"></i>
+                                                        <button type="button" onclick="stopListen()">Stop</button>
+                                                    </i>
+                                                    <!--<i class="button medium icon"><i class="check"></i><button id="hint" type="button" onclick="if (soundWasLoaded &amp;&amp; renderCount &amp;&amp; !isDone) {check(17061,2);$('#audioScript').focus();} return false;">Hint</button></i>-->
+                                                    <span id="hintword"
+                                                          style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                                    <div><textarea cols="38" rows="1" id="audioScript"
+                                                                   onkeyup="checkQuickMode(17061, 0)"
+                                                                   style=""></textarea></div>
+                                                    <br>
+                                                    <div id="logger"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <!--<table>-->
+                                                        <!--<tbody>-->
+                                                        <!--<tr>-->
+                                                            <!--<td align="right">Score: &nbsp;&nbsp;</td>-->
+                                                            <!--<td>-->
+                                                                <!--<div class="progresslineleft">-->
+                                                                    <!--<sup style="color:#008800;">min</sup><span-->
+                                                                        <!--id="minscore"-->
+                                                                        <!--style="font-weight: normal;font-size: 0.8em;color:#008800;"> 0</span>&nbsp;-->
+                                                                <!--</div>-->
+                                                                <!--<div class="progressbar">-->
+                                                                    <!--<div id="myavgscore" style="width:0%">&nbsp;</div>-->
+                                                                <!--</div>-->
+                                                                <!--{% set sum =0 %}-->
+                                                                <!--{% for t in track %}-->
+                                                                    <!--{% set sum = sum + t.point %}-->
+                                                                <!--{% endfor %}-->
+                                                                <!--<div id="maxscore" class="progresslineright">&nbsp;{{sum}}-->
+                                                                <!--</div>-->
+                                                                <!--<sup style="color:#008800;">max</sup>-->
+                                                            <!--</td>-->
+                                                        <!--</tr>-->
+                                                        <!--</tbody>-->
+                                                    <!--</table>-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <!--<div id="resultScore">-->
+                                <!--<br><br>-->
+                                <!--<canvas id="line-chart"></canvas>-->
+                                <!--<script type="text/javascript">-->
+                                    <!--$(document).ready(function () {-->
+                                        <!--loadChart(0);-->
+                                    <!--});-->
+                                <!--</script>-->
+                            <!--</div>-->
+                            <br>
+                            <br>
+
+                            <div id="myavgscore" style="font-weight: bold; font-size: 1.3em;"></div>
+                            <br>
+                            <div id="myscore"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
+                <div class="sidebar__inner">
+                    <div class="widget widget--transparent-box img-banner">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

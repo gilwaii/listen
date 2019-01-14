@@ -1,0 +1,139 @@
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+
+<section id="main-content">
+    <style>
+        .sidebox {
+            margin: 0 auto; /* center for now */
+            width: 20em; /* ems so it will grow */
+            background: url(/listen/src/image/mode/sbbody-r.gif) no-repeat bottom right;
+            font-size: 100%;
+        }
+        .boxhead {
+            background: url(/listen/src/image/mode/sbhead-r.gif) no-repeat top right;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .boxhead h2 {
+            background: url(/listen/src/image/mode/sbhead-l.gif) no-repeat top left;
+            margin: 0;
+            padding: 22px 30px 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1em;
+            text-shadow: rgba(0,0,0,.4) 0px 2px 5px; /* Safari-only, but cool */
+        }
+
+        .boxbody{
+            background: url(/listen/src/image/mode/sbbody-l.gif) no-repeat bottom left;
+            margin: 0;
+            padding: 5px 30px 31px;
+        }
+    </style>
+    <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+        <div class="container">
+            <div class="row" data-sticky_parent="">
+
+                <div class="col-lg-8 content-wrapper">
+                    <div data-sticky_column="">
+                        <div class="m-post-content m-post-content--tok">
+                            <div class="post-top">
+                                <div class="breadcrumbs u-margin-b-10">
+                                    <span>
+	                                      <a href="/listen/home">Home</a>
+                                    </span>
+                                    <span class="separetor">-</span>
+                                    <span class="current">{{lists[0].name}}</span>
+                                </div>
+                                <h1 class="post-title" data-index="{{lists[0].id}}">{{lists[0].name}}
+                                </h1>
+                            </div>
+                            <hr>
+
+                            <div class="entry-content">
+
+                                <font size="5">
+                                </font>
+                                <p>
+
+                                </p><table border="0">
+                                <tbody><tr>
+                                    <td>
+                                        <div style=" width:100px;height:180px; border: 2px solid #DDDDDD;background:white;">
+                                            <br><center><div style="color: #dd4b39;background-color: white;font-weight:bold;font-size:2em;"><i class="fa fa-star-half-o"></i><br>Level<br>
+                                            {% if lists[0].level_audio > 0 %}
+                                            {{lists[0].level_audio}}
+                                            {% else %}
+                                            {{lists[0].level_video}}
+                                            {% endif %}
+                                        </div></center>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a onclick="loadFullMode({{lists[0].id}})">
+                                            <div class="sidebox">
+                                                <div class="boxhead"><h2 style="color: #333333">1. Full Mode</h2></div>
+                                                <div class="boxbody">
+                                                    <p>Type the whole letter of a word</p>
+                                                    <img src="/listen/src/image/mode/fullmode.gif" border="0" style="align:center;" alt="Full Mode" width="240" height="67">
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="loadQuickMode({{lists[0].id}})">
+                                            <div class="sidebox">
+                                                <div class="boxhead"><h2 style="color: #333333;">2. Quick Mode</h2></div>
+                                                <div class="boxbody">
+                                                    <p>Type the first two letter only</p>
+                                                    <img src="/listen/src/image/mode/quickmode.gif" border="0" width="240" height="67">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="3"><br></td></tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <a href="#" onclick="loadBlankMode({{lists[0].id}})">
+                                            <div class="sidebox">
+                                                <div class="boxhead"><h2 style="color: #333333;">3. Blank Mode</h2></div>
+                                                <div class="boxbody">
+                                                    <p>Fill the blank.</p>
+                                                    <img src="/listen/src/image/mode/blankmode.gif" border="0" width="240" height="67">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#" onclick="loadNewMode({{lists[0].id}})">
+                                            <div class="sidebox">
+                                                <div class="boxhead"><h2 style="color: #333333;">4. Correction Mode </h2></div>
+                                                <div class="boxbody">
+                                                    <p>Type full sentence and correct it.</p>
+                                                    <img src="/listen/src/image/mode/correctmode.gif" border="0" width="240">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>
+

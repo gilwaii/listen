@@ -1,0 +1,41 @@
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+
+<section id="main-content">
+    <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+        <div class="container">
+            <div class="row" data-sticky_parent="">
+
+                <div class="col-lg-8 content-wrapper">
+                    <div data-sticky_column="">
+                        <div class="m-post-content m-post-content--tok">
+                            <div class="entry-content">
+                                <h2>Review my studies</h2>
+                                Score : {{user.point}}
+
+                                <table>
+                                    <tbody><tr>
+                                        <td>Your activity's rank: </td>
+                                        <td>
+                                            <div class="rating_bar">
+                                                <div style="width:0%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+                                <p>
+                                </p><div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>

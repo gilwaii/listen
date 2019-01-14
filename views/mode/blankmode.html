@@ -1,0 +1,185 @@
+<style>
+
+    .quiz-input
+    {
+        border: 3px solid #cccccc;
+        color: #cc0000;
+        font-weight: bold;
+        font-family: "Lucida Grande" ,Verdana,sans-serif;
+        height: 28px;
+        padding-left: 5px;
+        padding-top:1px;
+        font-size: 1.0em;
+        vertical-align: middle;
+        text-decoration: none;
+        -moz-border-radius-bottomleft: 4px;
+        -moz-border-radius-bottomright: 4px;
+        -moz-border-radius-topleft: 4px;
+        -moz-border-radius-topright: 4px;
+    }
+
+    .quiz-input:hover
+    {
+        border: #737373 3px solid;
+    }
+    .quiz-inputt:focus
+    {
+        border: #737373 3px solid;
+    }
+    #quizbox {
+        color: #333333;
+        background-color:#EEEEEE;
+        font-family: "Lucida Grande" ,Verdana,sans-serif;
+        font-size: medium;
+        font-weight: bold;
+        padding:15px 15px 5px 15px;
+        margin:10px 0px 0px 0px;
+    }
+
+    .controlDiv {
+        cursor: pointer;
+        height: 130px;
+        left: 47%;
+        margin: -60px 0px 0px -60px;
+        position: relative;
+        top: -115px;
+        width: 130px;
+        filter:alpha(opacity=80);opacity:0.8;
+    }
+    .controlDiv.play {
+        background: url(http://localhost/listen/src/image/youtube-play.png) no-repeat 50% 50%;
+    }
+
+    .controlDiv.stop {
+        background: url(http://localhost/listen/src/image/youtube-stop.png) no-repeat 50% 50%;
+    }
+</style>
+<section class="has-sidebar u-padding-t-50 u-padding-b-80">
+    <div class="container">
+        <div class="row" data-sticky_parent="" style="position: relative;">
+
+            <div class="col-lg-8 content-wrapper" style="position: relative;">
+                <div data-sticky_column="" class="" style="">
+                    <div class="m-post-content m-post-content--tok">
+                        <div class="post-top">
+                            <div class="breadcrumbs u-margin-b-10">
+                                <span>
+                                    {% if lang=="en" %}
+                                    <a href="/">Home</a>
+                                    {% else %}
+                                    <a href="/">Maison</a>
+                                    {% endif %}
+                                </span>
+                                <span class="separetor">-</span>
+                                <span><a href="/audio/choose/17061">Blank Mode</a></span>
+                                <span class="separetor">-</span>
+                                <span class="current">{{lists[0].name}}</span>
+                            </div>
+                            <h1 class="post-title">
+                                <table><tbody><tr><td>
+                                    <div style="width:120px;height:120px; border: 6px solid #DDDDDD; background:RGB(120,188,100);vertical-align:middle;">
+                                        <center style="padding:10px;"><a href="/audio/level/13" style="color: #000000;background-color: RGB(120,188,100);">Level 13</a></center>
+                                    </div>
+                                </td><td>
+                                    {{lists[0].name}}
+                                </td></tr></tbody></table>
+                            </h1>
+                            <div class="post-meta">
+                                <div class="item">
+                                    <i class="fa fa-microphone"></i>
+                                    <strong>French</strong>
+                                </div>
+                                <div class="item">
+                                    <i class="fa fa-clock-o"></i>
+                                    {{lists[0].create_at}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="entry-content">
+                            <div id="player2" style="border:2px solid #dddddd; padding-bottom:10px;">
+                                <p>
+                                </p><div id="sentence_list">
+                                <div style="display: none">
+                                    {% for t in track %}
+                                    <div id="{{t.name}}" data-index="{{t.id}}" class="track_id">
+                                        <div>{{t.start}}</div>
+                                        <div>{{t.end}}</div>
+                                        <div hidden>{{t.lyrics}}</div>
+                                        <div id="t-point">{{t.point}}</div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div align="center">
+                                    {% if lang=="en" %}
+                                    <i style="padding: 0px 15px;">Click play to start dictation or select the
+                                        track</i>
+                                    {% else %}
+                                    <i style="padding: 0px 15px;">Cliquez sur Lecture pour lancer la dictée ou sélectionner la piste.</i>
+                                    {% endif %} : <select id="sentences_no" class="select-style" onchange="stopListenBlank()">
+                                    {% for t in track %}
+                                    <option value="{{t.sequence}}" >{{t.sequence}}</option>
+                                    {% endfor %}
+                                </select>
+                                    of {{track|length}}
+                                </div>
+                                <div>
+                                    {% if lists[0].file_id == 2 %}
+                                    <div>
+                                        <video width="320" height="240" preload controls id="audio-element">
+                                            <source src="{{lists[0].path}}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    {% else %}
+                                    <div style="display: none;">
+                                        <audio preload controls id="audio-element">
+                                            <source src="{{lists[0].path}}" type="audio/mp3"></source>
+                                        </audio>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <p>
+                                </p><div id="quizcontainer" style="overflow: hidden;position: relative;height:200px;">
+                                <div id="slimprogress" style="width:590px; height:3px;"><div id="nprogress"><div class="bar" role="bar" style="transform: translate3d(-68.4143%, 0px, 0px); transition: all 50ms ease 0s;"><div class="peg"></div></div></div></div>
+                                <div id="quizbox" style="height:200px;"><input id="answer0" type="hidden" value="Pretty">
+                                    <div style="font-size:1.4em;" id="answer-question">
+
+                                    </div>
+                                </div>
+                                <script>
+                                    $(document).ready(function () {
+                                       loadBlank();
+                                    });
+                                </script>
+                                <div id="controlPlay" onclick="playStart()" class="controlDiv play"></div>
+                            </div>
+                                <span id="trackmenu" style="height:50px;background-color:#EEEEEE;"></span>
+                                <p></p>
+                                <br>
+                                <table>
+                                    <tbody><tr>
+                                        <td width="200">
+                                            <i class="button medium icon"><i class="delete"></i><button type="button" onclick="stopListen()">Stop</button></i>
+                                            <i class="button medium icon"><i class="check"></i><button id="hint" type="button" onclick="checkBlankMode(answer0,answer1,answer2)">Check</button></i>
+                                            &nbsp; <span id="hintword" style="font-size:16px;font-weight:bold;color:blue;"></span>
+                                        </td>
+                                    </tr>
+                                    </tbody></table>
+
+                                <p></p>
+                            </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40" style="position: static;">
+                <div class="sidebar__inner" data-sticky_column="" style="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

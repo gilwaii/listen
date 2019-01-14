@@ -1,0 +1,25 @@
+<section class="has-sidebar u-padding-t-50 u-padding-b-80">
+    <div class="container">
+        <div class="row" data-sticky_parent="" style="position: relative;">
+
+            <div class="col-lg-8 content-wrapper" style="position: static;">
+                <div data-sticky_column="" class="" style="">
+                    <div class="m-post-content m-post-content--tok">
+                        <div class="entry-content">
+                            <h2>Search for : {{search}}</h2>
+                            <ul>
+                                {% for res in result %}
+                                <li><a href="#">{{res.name}}</a>&nbsp;&nbsp;&nbsp;{{res.create_at}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <p>
+                        </p>
+                        <div id="cse-search-results"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

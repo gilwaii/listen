@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+<head>
+    <title>Listen And Write</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Listen and Write - Language Dictation"/>
+    <meta name="keywords" content="dictation,english,listening,writing,listen,write,learn,speaking"/>
+    <title>Listen and Write</title>
+    <link rel="shortcut icon" type="image/png" href="#"/>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Heebo:100,300,400,500,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" media="screen" href="/listen/vendor/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" href="/listen/src/css/newstoday.css"/>
+    <link rel="stylesheet" media="screen" href="/listen/vendor/font-awesome-4.7.0/css/font-awesome.min.css"/>
+
+    <link rel="stylesheet" media="screen" href="/listen/src/css/style_1.css"/>
+    <link rel="stylesheet" media="screen" href="/listen/src/css/style_2.css"/>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/listen/src/js/load-content.js"></script>
+    <script type="text/javascript" src="/listen/src/js/search.js"></script>
+    <script src="http://localhost/listen/vendor/Chart/Chart.min.js"></script>
+    <script type="text/javascript" src="/listen/src/js/upload.js"></script>
+    <script>
+        function validateForm() {
+            var name = document.forms["upload-audio"]["name"].value;
+            if (name=== ""){
+                alert("Name not null");
+                return false;
+            }
+            var level = document.forms["upload-audio"]["level"].value;
+            if (level === ""){
+                alert("Level not null");
+                return false;
+            }
+            var mp3 = document.forms["upload-audio"]["datafile"].value;
+            if (mp3 === ""){
+                alert("Mp3 not null");
+                return false;
+            }
+            var insert_rows = document.forms["upload-audio"]["insert_rows"].value;
+            for (var i=0 ;i<insert_rows;i++){
+                if (document.forms["upload-audio"]["duration_"+(i+1)].value === ""){
+                    alert("Duration not null");
+                    return false;
+                }
+                if (document.forms["upload-audio"]["start_"+(i+1)].value === ""){
+                    alert("Start not null");
+                    return false;
+                }
+                if (document.forms["upload-audio"]["end_"+(i+1)].value === ""){
+                    alert("End not null");
+                    return false;
+                }
+                if (document.forms["upload-audio"]["lyrics_"+(i+1)].value === ""){
+                    alert("Lyrics not null");
+                    return false;
+                }
+                if (parseInt(document.forms["upload-audio"]["end_"+(i+1)].value) <= parseInt(document.forms["upload-audio"]["start_"+(i+1)].value)){
+                    alert("Error end less than start");
+                    return false;
+                }
+                if (parseInt(document.forms["upload-audio"]["end_"+(i+1)].value) > parseInt(document.forms["upload-audio"]["duration_"+(i+1)].value)){
+                    alert("Error duration less than end");
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+
+<section id="main-content">
+    <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+        <div class="container">
+            {% if error != '' %}
+            <h2 style="color: red">{{error}}</h2>
+            {% endif %}
+            <div class="row" data-sticky_parent="" style="position: relative;">
+                <div class="col-lg-8 content-wrapper" style="position: static;">
+                    <div data-sticky_column="" class="" style="">
+                        <div class="m-post-content m-post-content--tok">
+                            <div class="entry-content">
+                                <h2>
+                                    <img src="src/image/upload.png" border="0" style="width: 25px;height: 25px"> Submit
+                                    a new audio! &gt;&gt;
+                                </h2>
+                                <form name="upload-audio" onsubmit="return validateForm()" action="http://localhost/listen/backend/php/upload.php" enctype="multipart/form-data" method="post" >
+                                    <p>
+                                        Name:<br>
+                                        <input id="audio_title" name="name" size="70" type="text">
+                                    </p>
+                                    <p>
+                                        Level:<br>
+                                        <input id="audio_doclink" name="level" type="number" min="1">
+                                    </p>
+                                    <p>
+                                        Your audio (mp3 only):<br>
+                                        <input id="upload_datafile" name="datafile" size="50" type="file">
+                                        <br> <strong>(
+                                        You are solely responsible for your audio that you upload.</strong>
+                                        )
+
+                                    </p>
+
+                                    <!--<p>-->
+                                        <!--Description:<br>-->
+                                        <!--<textarea cols="48" id="audio_description" name="audio[description]"-->
+                                                  <!--rows="3"></textarea>-->
+                                    <!--</p>-->
+                                    <p>
+                                    <p>
+                                        Track:<br>
+                                        <input type="number" name="insert_rows" id="insert_rows" value="1" min="1"
+                                               onchange="changeInput()">
+                                    </p>
+                                    <div >
+                                        <p>
+                                            <li id="track-1">
+                                        track-1<br>
+                                        <div id="track-default">
+                                            <input type="number" name="duration_1" id="duration" min="1"
+                                                   placeholder="Duration">
+                                            <input type="number" name="start_1" id="start" min="1" placeholder="Start">
+                                            <input type="number" name="end_1" id="end" min="1" placeholder="End">
+                                            <p>
+                                                Lyrics:<br>
+                                                <textarea cols="48" name="lyrics_1"
+                                                          rows="3"></textarea>
+                                            </p>
+
+                                        </div>
+                                    </li>
+                                        <ul id="number-track">
+                                            <li>
+
+                                            </li>
+                                        </ul>
+
+                                        </p>
+
+                                    <p>
+                                        <input name="commit" type="submit" value="Submit a new audio">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>
+
+
+</body>
+</html>
+

@@ -1,0 +1,329 @@
+<!-- Main: Popular News [MP3] / Main Index / Popular News[YOUTUBE] -->
+<section class="has-sidebar u-padding-t-10">
+    <div class="container">
+        <div class="row" data-sticky_parent>
+            <!-- Main: Main Index -->
+            <div class="col-lg-8 col-xl-6 content-wrapper u-sm-down-margin-b-40">
+                <div class="posts-box3 archive-box">
+                    <div class="posts-box3__top">
+                        {% if lang=='fr' %}
+                        <h2 class="posts-box3__top__title">Vidéos</h2>
+                        {% else %}
+                        <h2 class="posts-box3__top__title">Videos</h2>
+                        {% endif %}
+                    </div>
+                    <div class="archive-posts">
+                        {% for video in videos %}
+                        <article class="post-item">
+                            <figure>
+                                <a href="/listen/choose-mode?id={{video.id}}" class="choose-mode">
+                                    <img src="{{video.image}}"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <h6 class="post-title">
+                                        <a  href="/listen/choose-mode?id={{video.id}}" class="choose-mode" onclick="chooseMode({{video.id}})">{{video.name}}</a>
+                                    </h6>
+                                    <div class="item">
+                                        <i class="fa fa-star"></i>{{video.level_video}}
+                                    </div>
+                                    <div class="item">
+                                        <i class="fa fa-hourglass-end"></i>{{video.duration}}
+                                    </div>
+                                    <div class="item">
+                                        <time><i class="fa fa-clock-o"></i>{{video.create_at}}</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 sidebar sidebar--left d-lg-block"></div>
+            <!-- Main: Popular News [MP3] -->
+            <div class="col-xl-3 sidebar sidebar--right d-none d-xl-block">
+                <div class="widget widget--transparent-box img-banner">
+
+                </div>
+
+                <div class="widget widget--transparent-box single-cat-thum-left">
+                    <div class="widget__title has-ajax-load" alt="Popular News [MP3]">
+                        <h4>Popular Audios</h4>
+                        <div class="ajax-load-btns ajax-load-btns--alt">
+
+                        </div>
+                    </div>
+                    <ul class="posts-wrap">
+                        {% for audio in audios %}
+                        <li>
+                            <div class="post-content">
+                                <h5 class="post-title">
+                                    <a href="/listen/choose-mode?id={{audio.id}}">{{audio.name}}</a>
+                                </h5>
+                                <div class="post-meta">
+                                    <i class="fa fa-star-o"></i>level = {{audio.level_audio}} &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> {{audio.create_at}}
+                                </div>
+
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Main: Youtube  -->
+<section class="full-width u-margin-t-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 u-md-down-margin-b-40">
+                <div class="posts-box3 single-item">
+                    <div class="posts-box3__top">
+                        <h4><span>Popular Videos</span></h4>
+                    </div>
+                    <div class="posts-list has-big-in-top-trns">
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star"></i>level = 16
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 2:34
+                                </div>
+                                <h4 class="post-title"><a href="#">Trans Oral History Project</a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault1.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-o"></i>level = 6
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 3:43
+                                </div>
+                                <h4 class="post-title"><a href="#">Meghan Trainor - Like I&#39;m
+                                    Gonna Lose You ft. John Legend</a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault2.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-o"></i>level = 5
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 2:55
+                                </div>
+                                <h4 class="post-title"><a href="#">Adele - &quot;Million Years Ago&quot; </a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault3.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-o"></i>level = 4
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 2:15
+                                </div>
+                                <h4 class="post-title"><a href="#">Thanksgiving song</a>
+                                </h4>
+                            </div>
+                        </article>
+                    </div><!--//.posts-list -->
+                    <div class="ajax-load-btns ajax-load-btns--alt">
+                        <button class="next" onclick="document.location='#'"><i
+                                class="fa fa-angle-right"></i></button>
+                    </div>
+
+                </div> <!--//.posts-box  -->
+            </div>
+
+            <div class="col-lg-4 u-md-down-margin-b-40">
+                <div class="posts-box3 single-item">
+                    <div class="posts-box3__top">
+                        <h4><span>VOA Learning English</span></h4>
+                    </div>
+
+                    <div class="posts-list has-big-in-top-trns">
+
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault4.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-half-o"></i>level = 7
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 0:53
+                                </div>
+                                <h3 class="post-title">
+                                    <a href="#">Let&#39;s Learn English Lesson 29: A Long Time
+                                        Ago</a>
+                                </h3>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault5.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-half-o"></i>level = 9
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 2:40
+                                </div>
+                                <h3 class="post-title">
+                                    <a href="#">Let&#39;s Learn English Lesson 28: I Passed It!</a>
+                                </h3>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault6.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-half-o"></i>level = 10
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 3:07
+                                </div>
+                                <h3 class="post-title">
+                                    <a href="#">Let&#39;s Learn English Lesson 27</a>
+                                </h3>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault7.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-half-o"></i>level = 12
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 3:09
+                                </div>
+                                <h3 class="post-title">
+                                    <a href="#">Let&#39;s Learn English Level 2 Lesson 26: Fish out
+                                        of Water</a>
+                                </h3>
+                            </div>
+                        </article>
+
+                    </div><!--//.posts-list -->
+                    <div class="ajax-load-btns ajax-load-btns--alt">
+                        <button class="next" onclick="document.location='#'"><i
+                                class="fa fa-angle-right"></i></button>
+                    </div>
+
+                </div> <!--//.posts-box  -->
+            </div>
+
+            <div class="col-lg-4">
+                <div class="posts-box3 single-item">
+                    <div class="posts-box3__top">
+                        <h4><span>TED</span></h4>
+                    </div>
+
+                    <div class="posts-list has-big-in-top-trns">
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault8.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star"></i>level = 15
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 4:49
+                                </div>
+                                <h4 class="post-title"><a href="#">How do cigarettes affect the
+                                    body?</a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault9.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-o"></i>level = 6
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 0:16
+                                </div>
+                                <h4 class="post-title"><a href="#">you smell with your body not just
+                                    your nose</a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault10.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star-half-o"></i>level = 13
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 1:58
+                                </div>
+                                <h4 class="post-title"><a href="#">How cancer cells communicate —
+                                    and how we can slow them down | Hasini Jayatilaka</a>
+                                </h4>
+                            </div>
+                        </article>
+                        <article class="post-item">
+                            <figure>
+                                <a href="#">
+                                    <img src="/listen/src/image/decoration/mqdefault11.jpg"></a>
+                            </figure>
+                            <div class="post-content">
+                                <div class="post-meta">
+                                    <i class="fa fa-star"></i>level = 14
+                                    &nbsp;
+                                    <i class="fa fa-hourglass-o"></i> 2:18
+                                </div>
+                                <h4 class="post-title"><a href="#">You are fluent in this language
+                                    (and don&#39;t even know it) | Christoph Niemann</a>
+                                </h4>
+                            </div>
+                        </article>
+                    </div><!--//.posts-list -->
+                    <div class="ajax-load-btns ajax-load-btns--alt">
+                        <button class="next" onclick="document.location='#'"><i
+                                class="fa fa-angle-right"></i></button>
+                    </div>
+
+                </div> <!--//.posts-box  -->
+            </div>
+
+        </div>
+    </div>
+</section>
+<br/>

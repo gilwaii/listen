@@ -1,0 +1,71 @@
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+<section id="main-content">
+    <section id="audios">
+        <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+            <div class="container">
+                <div class="row" data-sticky_parent="" style="position: relative;">
+                    <div class="col-lg-8 content-wrapper">
+                        <div class="posts-box3 archive-box">
+                            <div class="posts-box3__top">
+                                {% if lang=='fr' %}
+                                <h2 class="posts-box3__top__title">Dernières audios: </h2>
+                                {% else %}
+                                <h2 class="posts-box3__top__title">Latest audios: </h2>
+                                {% endif %}
+                            </div>
+                            <div class="archive-posts">
+                                {% for list in lists %}
+                                <article class="post-item">
+                                    <div class="post-content">
+                                        <div class="post-meta">
+                                            <h6 class="post-title">
+                                                <a href="/listen/choose-mode?id={{list.id}}" data-index="{{list.id}}">{{list.name}}</a>
+                                            </h6>
+                                            <div class="item">
+                                            </div>
+
+                                            <div class="item">
+                                                <i class="fa fa-star-half-o"></i>{{list.level_audio}}
+                                            </div>
+                                            <div class="item">
+                                                <i class="fa fa-hourglass-o"></i>{{list.duration|date('i:s', '+07:00 GMT') }}
+                                            </div>
+                                            <div class="item">
+                                                <time><i class="fa fa-clock-o"></i>{{list.create_at}}</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                <hr>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
+                        <div class="sidebar__inner" data-sticky_column="" style="">
+                            <div class="widget widget--transparent-box img-banner">
+                                <figure>
+                                    <div class="m-post-content m-post-content--nyc">
+                                        <b>Levels</b>
+                                        <div class="post-tags">
+                                            <div class="tags-wrap">
+                                                {% for l in level %}
+                                                <a style="font-size: 80%;" href="#" onclick="loadLevelAudio({{l.level}})">{{l.level}}</a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>

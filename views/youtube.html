@@ -1,0 +1,97 @@
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+
+<section id="main-content">
+    <section id="youtube">
+        <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+            <div class="container">
+                <div class="row" data-sticky_parent="">
+
+                    <div class="col-lg-8 content-wrapper">
+                        <div class="posts-box3 archive-box">
+                            <div class="posts-box3__top">
+                                {% if lang=='fr' %}
+                                <h2 class="posts-box3__top__title">Latest vidéo: </h2>
+                                {% else %}
+                                <h2 class="posts-box3__top__title">Dernières video: </h2>
+                                {% endif %}
+                            </div>
+                            <div class="archive-posts">
+                                {% for video in videos %}
+                                <article class="post-item">
+                                    <figure>
+                                        <a href="/listen/choose-mode?id={{video.id}}">
+                                            <img src="{{video.image}}"></a>
+                                    </figure>
+                                    <div class="post-content">
+                                        <div class="post-meta">
+                                            <h6 class="post-title">
+                                                <a href="/listen/choose-mode?id={{video.id}}">{{video.name}}</a>
+                                            </h6>
+                                            <div class="item">
+                                                <i class="fa fa-star"></i>{{video.level_video}}
+                                            </div>
+                                            <div class="item">
+                                                <i class="fa fa-hourglass-end"></i>{{video.duration}}
+                                            </div>
+                                            <div class="item">
+                                                <time><i class="fa fa-clock-o"></i>{{video.create_at}}</time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                                {% endfor %}
+                            </div>
+                        </div> <!--//.posts-box  -->
+                    </div>
+
+                    <div class="col-lg-4 sidebar sidebar--right u-md-down-margin-t-40">
+                        <div class="sidebar__inner" data-sticky_column="" style="">
+                            <div class="widget widget--transparent-box img-banner">
+                                <figure>
+                                    <div class="m-post-content m-post-content--nyc">
+                                        <b>Levels</b>
+                                        <div class="post-tags">
+                                            <div class="tags-wrap">
+                                                <a style="font-size: 80%;" href="#">39</a>
+                                                <a style="font-size: 80%;" href="#">23</a>
+                                                <a style="font-size: 80%;" href="#">22</a>
+                                                <a style="font-size: 80%;" href="#">21</a>
+                                                <a style="font-size: 80%;" href="#">20</a>
+                                                <a style="font-size: 80%;" href="#">19</a>
+                                                <a style="font-size: 80%;" href="#">18</a>
+                                                <a style="font-size: 80%;" href="#">17</a>
+                                                <a style="font-size: 80%;" href="#">16</a>
+                                                <a style="font-size: 80%;" href="#">15</a>
+                                                <a style="font-size: 80%;" href="#">14</a>
+                                                <a style="font-size: 80%;" href="#">13</a>
+                                                <a style="font-size: 80%;" href="#">12</a>
+                                                <a style="font-size: 80%;" href="#">11</a>
+                                                <a style="font-size: 80%;" href="#">10</a>
+                                                <a style="font-size: 80%;" href="#">9</a>
+                                                <a style="font-size: 80%;" href="#">8</a>
+                                                <a style="font-size: 80%;" href="#">7</a>
+                                                <a style="font-size: 80%;" href="#">6</a>
+                                                <a style="font-size: 80%;" href="#">5</a>
+                                                <a style="font-size: 80%;" href="#">4</a>
+                                                <a style="font-size: 80%;" href="#">3</a>
+                                                <a style="font-size: 80%;" href="#">2</a>
+                                                <a style="font-size: 80%;" href="#">1</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</section>
+
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>
+

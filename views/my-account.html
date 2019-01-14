@@ -1,0 +1,33 @@
+<section id="header-content">
+    {{ include('header.html') }}
+</section>
+
+<section id="main-content">
+    <section class="has-sidebar u-padding-t-50 u-padding-b-80">
+        <div class="container">
+            <div class="row" data-sticky_parent="" style="position: relative;">
+
+                <div class="col-lg-8 content-wrapper" style="position: static;">
+                    <div data-sticky_column="" class="" style="">
+                        <div class="m-post-content m-post-content--tok">
+                            <div class="entry-content">
+                                <form  enctype="multipart/form-data" method="post">
+
+                                    <p><label for="login">Login</p><p>
+                                    <input value="{{username}}" size="30" disabled="" id="login">
+
+                                </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>
+
+<section id="footer-content">
+    {{ include('footer.html')}}
+</section>
